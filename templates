@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Proyecto Flask</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>🍔 Mi Aplicación Flask</h1>
+
+{% if error1 %}<p class="error">{{ error1 }}</p>{% endif %}
+{% if exito1 %}<p class="exito">{{ exito1 }}</p>{% endif %}
+{% if error2 %}<p class="error">{{ error2 }}</p>{% endif %}
+{% if exito2 %}<p class="exito">{{ exito2 }}</p>{% endif %}
+
+<div class="caja">
+<h2>Formulario 1: Registro de clientes</h2>
+<form action="/registro" method="POST" onsubmit="return validar1()">
+<input type="text" name="nombre" id="nombre" placeholder="Nombre">
+<input type="text" name="telefono" id="telefono" placeholder="Teléfono">
+<input type="email" name="correo" id="correo" placeholder="Correo">
+<button type="submit">Registrar</button>
+</form>
+<p>Total clientes: <span id="contador1">{{ clientes|length }}</span></p>
+</div>
+
+<div class="caja">
+<h2>Formulario 2: Pedido de alimentos</h2>
+<form action="/pedido" method="POST" onsubmit="return validar2()">
+<input type="text" name="cliente" id="cliente" placeholder="Nombre del cliente">
+<select name="comida">
+<option value="">Elige comida</option>
+<option value="Hamburguesa">Hamburguesa</option>
+<option value="Tacos">Tacos</option>
+<option value="Pizza">Pizza</option>
+</select>
+<input type="number" name="cantidad" id="cantidad" placeholder="Cantidad">
+<button type="submit">Pedir</button>
+</form>
+<button onclick="saludar()">Haz click aquí</button>
+<p id="mensaje"></p>
+</div>
+
+<script>
+function validar1(){
+  if(document.getElementById('nombre').value == '' || document.getElementById('telefono').value == ''){
+    alert('Faltan datos en registro');
+    return false;
+  }
+  return true;
+}
+function validar2(){
+  if(document.getElementById('cliente').value == '' || document.getElementById('cantidad').value == ''){
+    alert('Faltan datos en pedido');
+    return false;
+  }
+  return true;
+}
+function saludar(){
+  document.getElementById('mensaje').innerText = '¡Gracias por tu pedido!';
+}
+</script>
+</body>
+</html>
